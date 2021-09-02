@@ -1,11 +1,20 @@
+import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
 import {View, StyleSheet, SafeAreaView, Text} from 'react-native';
+
 import AuthScreen from './screens/AuthScreen';
+import HomeScreen from './screens/HomeScreen';
+
+import HomeHeader from './components/HomeHeader';
+
+import Screens from './navigation';
 
 const App = () => {
   return (
     <SafeAreaView style={{flex: 1}}>
-      <AuthScreen newuser={true} />
+      <NavigationContainer>
+        <Screens />
+      </NavigationContainer>
     </SafeAreaView>
   );
 };

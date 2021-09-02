@@ -13,7 +13,8 @@ const reviewSchema = yup.object({
   password: yup.string().required().min(4),
 });
 
-const AuthScreen = ({newuser = true}) => {
+const AuthScreen = ({route}) => {
+  const {newuser} = route.params;
   return (
     <View style={styles.container}>
       <View style={styles.creds}>

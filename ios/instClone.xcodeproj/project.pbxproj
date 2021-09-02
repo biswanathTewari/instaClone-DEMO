@@ -13,6 +13,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		9FCD525426E133DF00518888 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 9FCD525326E133DF00518888 /* fonts */; };
 		9FE8BDCCA8F35E329F4B6336 /* libPods-instClone-instCloneTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 71C560D17A21B2108E5016E9 /* libPods-instClone-instCloneTests.a */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = instClone/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		86592CE9898DF1D3A1B5C80A /* Pods-instClone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-instClone.debug.xcconfig"; path = "Target Support Files/Pods-instClone/Pods-instClone.debug.xcconfig"; sourceTree = "<group>"; };
 		8F45017B9A0DA7157F41B1B9 /* libPods-instClone.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-instClone.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9FCD525326E133DF00518888 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		B32D699EBEE6DD68B9FB51B9 /* Pods-instClone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-instClone.release.xcconfig"; path = "Target Support Files/Pods-instClone/Pods-instClone.release.xcconfig"; sourceTree = "<group>"; };
 		B60381399FE89DF3B9FB7547 /* Pods-instClone-instCloneTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-instClone-instCloneTests.release.xcconfig"; path = "Target Support Files/Pods-instClone-instCloneTests/Pods-instClone-instCloneTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -116,6 +118,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				9FCD525326E133DF00518888 /* fonts */,
 				13B07FAE1A68108700A75B9A /* instClone */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* instCloneTests */,
@@ -145,7 +148,6 @@
 				155366D39B4EC263D50BCED0 /* Pods-instClone-instCloneTests.debug.xcconfig */,
 				B60381399FE89DF3B9FB7547 /* Pods-instClone-instCloneTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -243,6 +245,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FCD525426E133DF00518888 /* fonts in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
