@@ -1,15 +1,27 @@
 import React from 'react';
-import {View, StyleSheet, Text, Dimensions} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Text,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
 
 import FontAwesome, {SolidIcons} from 'react-native-fontawesome';
+
+import NavigationAction from '../navigation/NavigationAction';
 
 const HomeHeader = ({title}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
       <View style={styles.buttons}>
-        <FontAwesome style={styles.iconStyle} icon={SolidIcons.userCircle} />
-        <FontAwesome style={styles.iconStyle} icon={SolidIcons.signOutAlt} />
+        <TouchableOpacity onPress={() => NavigationAction.navigate('Profile')}>
+          <FontAwesome style={styles.iconStyle} icon={SolidIcons.userCircle} />
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <FontAwesome style={styles.iconStyle} icon={SolidIcons.signOutAlt} />
+        </TouchableOpacity>
       </View>
     </View>
   );

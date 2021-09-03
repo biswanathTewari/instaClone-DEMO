@@ -1,5 +1,12 @@
-import React from 'react';
-import {View, StyleSheet, Text, TextInput, Button} from 'react-native';
+import React, {useEffect} from 'react';
+import {
+  View,
+  StyleSheet,
+  Text,
+  TextInput,
+  Button,
+  TouchableOpacity,
+} from 'react-native';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 
@@ -7,14 +14,21 @@ import sizes from '../config/sizes';
 import AppTextInput from '../components/AppTextInput';
 import AppButton from '../components/AppButton';
 
+import NavigationAction from '../navigation/NavigationAction';
+
 const reviewSchema = yup.object({
   email: yup.string().required().email(),
   //displayName: yup.string(),
   password: yup.string().required().min(4),
 });
 
-const AuthScreen = ({route}) => {
+const AuthScreen = ({route, navigation}) => {
   const {newuser} = route.params;
+
+  useEffect(() => {
+    if (newuser) NavigationAction.set(navigation);
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.creds}>
@@ -25,6 +39,7 @@ const AuthScreen = ({route}) => {
           onSubmit={(values, actions) => {
             console.log(values);
             actions.resetForm();
+            NavigationAction.resetTo('Home');
           }}>
           {({
             handleSubmit,
@@ -79,10 +94,16 @@ const AuthScreen = ({route}) => {
       <View style={styles.footer}>
         <Text>
           {newuser ? 'Already have an account?' : 'New here?'}
-          <Text style={{fontStyle: 'italic', textDecorationLine: 'underline'}}>
-            {' '}
-            Click here
-          </Text>
+          <TouchableOpacity
+            onPress={() =>
+              NavigationAction.navigate(newuser ? 'LogIn' : 'SignUp')
+            }>
+            <Text
+              style={{fontStyle: 'italic', textDecorationLine: 'underline'}}>
+              {' '}
+              Click here
+            </Text>
+          </TouchableOpacity>
         </Text>
       </View>
     </View>

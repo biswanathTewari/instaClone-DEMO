@@ -14,7 +14,7 @@ const App = () => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <NavigationContainer>
-        <ProfileScreen />
+        <Screens />
       </NavigationContainer>
     </SafeAreaView>
   );
