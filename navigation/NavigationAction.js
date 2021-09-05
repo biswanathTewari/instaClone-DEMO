@@ -19,7 +19,7 @@ class NavigationAction {
   resetTo = (routeName, index = 0, params = {}) => {
     const resetAction = CommonActions.reset({
       index,
-      routes: [{name: routeName}],
+      routes: [{name: routeName, params: params}],
     });
     this.navigation.dispatch(resetAction);
   };

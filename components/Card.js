@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     width: '100%',
     borderColor: 'black',
     borderWidth: 3,
-    marginBottom: 4,
+    marginBottom: 20,
   },
   user: {
     height: '10%',

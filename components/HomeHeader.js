@@ -19,7 +19,7 @@ const HomeHeader = ({title}) => {
         <TouchableOpacity onPress={() => NavigationAction.navigate('Profile')}>
           <FontAwesome style={styles.iconStyle} icon={SolidIcons.userCircle} />
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => NavigationAction.resetTo('LogIn')}>
           <FontAwesome style={styles.iconStyle} icon={SolidIcons.signOutAlt} />
         </TouchableOpacity>
       </View>
