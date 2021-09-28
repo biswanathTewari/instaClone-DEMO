@@ -7,11 +7,11 @@ const Card = ({item}) => {
   return (
     <View style={styles.container}>
       <View style={styles.user}>
-        <Text style={{color: 'purple'}}>{item.account_url}</Text>
+        <Text style={{color: 'purple'}}>{item.caption}</Text>
       </View>
       <Image
         source={{
-          uri: item.images[0].link ? item.images[0].link : defaultImageLink,
+          uri: item.imageUrl ? item.imageUrl : defaultImageLink,
         }}
         resizeMode="contain"
         style={styles.image}
