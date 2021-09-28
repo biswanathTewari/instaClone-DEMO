@@ -4,7 +4,7 @@ import {View, StyleSheet, TextInput, Text} from 'react-native';
 const AppTextInput = ({...props}) => {
   return (
     <View style={styles.container}>
-      <TextInput style={styles.input} {...props} />
+      <TextInput style={styles.input} autoCapitalize="none" {...props} />
     </View>
   );
 };

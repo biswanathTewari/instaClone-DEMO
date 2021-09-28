@@ -16,6 +16,15 @@ import AppButton from '../components/AppButton';
 
 import NavigationAction from '../navigation/NavigationAction';
 
+import FIREBASE from '../firebase/apis';
+
+const login = async (email, password) => {
+  const res = await FIREBASE.logIn(email, password);
+  const userRes = await FIREBASE.getUser(res.user.uid);
+
+  console.log(userRes.data().displayName);
+};
+
 const reviewSchema = yup.object({
   email: yup.string().required().email(),
   //displayName: yup.string(),
@@ -38,8 +47,9 @@ const AuthScreen = ({route, navigation}) => {
           validationSchema={reviewSchema}
           onSubmit={(values, actions) => {
             console.log(values);
-            actions.resetForm();
-            NavigationAction.resetTo('Home');
+            login(values.email, values.password);
+            // actions.resetForm();
+            // NavigationAction.resetTo('Home');
           }}>
           {({
             handleSubmit,
