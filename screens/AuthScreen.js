@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {Formik} from 'formik';
 import * as yup from 'yup';
+import {connect} from 'react-redux';
 
 import sizes from '../config/sizes';
 import AppTextInput from '../components/AppTextInput';
@@ -16,22 +17,20 @@ import AppButton from '../components/AppButton';
 
 import NavigationAction from '../navigation/NavigationAction';
 
-import FIREBASE from '../firebase/apis';
+import {logIn, signUp} from '../actions';
 
-const login = async (email, password) => {
-  const res = await FIREBASE.logIn(email, password);
-  const userRes = await FIREBASE.getUser(res.user.uid);
-
-  console.log(userRes.data().displayName);
-};
-
-const reviewSchema = yup.object({
+const reviewSchemaSignUp = yup.object({
   email: yup.string().required().email(),
-  //displayName: yup.string(),
+  displayName: yup.string(),
   password: yup.string().required().min(4),
 });
 
-const AuthScreen = ({route, navigation}) => {
+const reviewSchemaLogin = yup.object({
+  email: yup.string().required().email(),
+  password: yup.string().required().min(4),
+});
+
+const AuthScreen = ({route, navigation, logIn, signUp}) => {
   const {newuser} = route.params;
 
   useEffect(() => {
@@ -44,12 +43,25 @@ const AuthScreen = ({route, navigation}) => {
         <Text style={styles.header}>Welcome!</Text>
         <Formik
           initialValues={{email: '', password: '', displayName: ''}}
-          validationSchema={reviewSchema}
+          validationSchema={newuser ? reviewSchemaSignUp : reviewSchemaLogin}
           onSubmit={(values, actions) => {
             console.log(values);
-            login(values.email, values.password);
-            // actions.resetForm();
-            // NavigationAction.resetTo('Home');
+            if (newuser) {
+              console.log('signin up');
+              const payload = {
+                email: values.email,
+                displayName: values.displayName,
+                password: values.password,
+              };
+              signUp(payload);
+            } else {
+              const payload = {
+                email: values.email,
+                password: values.password,
+              };
+              logIn(payload);
+            }
+            //actions.resetForm();
           }}>
           {({
             handleSubmit,
@@ -140,4 +152,8 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AuthScreen;
+const mapStateToProps = state => {
+  return {...state};
+};
+
+export default connect(mapStateToProps, {logIn, signUp})(AuthScreen);
