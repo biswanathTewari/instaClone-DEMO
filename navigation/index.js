@@ -9,6 +9,7 @@ import HomeScreen from '../screens/HomeScreen';
 import AuthScreen from '../screens/AuthScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import FollowersScreen from '../screens/FollowerScreen';
+import FollowingScreen from '../screens/FollowingScreen';
 
 import HomeHeader from '../components/HomeHeader';
 
@@ -125,6 +126,13 @@ const index = ({user}) => {
         component={FollowersScreen}
         options={({route}) => ({
           title: 'Followers',
+        })}
+      />
+      <Stack.Screen
+        name="Following"
+        component={FollowingScreen}
+        options={({route}) => ({
+          title: 'Following',
         })}
       />
     </Stack.Navigator>

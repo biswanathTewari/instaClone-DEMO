@@ -44,11 +44,11 @@ const FIREBASE = {
       .get();
   },
 
-  getFollowing: (profileId, showModal) => {
+  getFollowing: profileId => {
     return firestoreDB
       .collection('users')
       .doc(profileId)
-      .collection(showModal)
+      .collection('following')
       .get();
   },
 

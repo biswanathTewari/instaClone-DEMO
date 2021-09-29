@@ -6,12 +6,14 @@ import user from './user';
 import feed from './feed';
 import profile from './profile';
 import followers from './followers';
+import following from './following';
 
 const combineReducer = combineReducers({
   user: user,
   feed: feed,
   profile: profile,
   followers: followers,
+  following: following,
 });
 
 const rootCombineReducer = (state, action) => {

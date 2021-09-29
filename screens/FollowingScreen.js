@@ -10,28 +10,28 @@ import {
 } from 'react-native';
 import {connect} from 'react-redux';
 
-import {getFollowers} from '../actions';
+import {getFollowing} from '../actions';
 
 import FollowersItem from '../components/FollowersItem';
 
-const FollowersScreen = ({route, followers, getFollowers}) => {
+const FollowingScreen = ({route, following, getFollowing}) => {
   useEffect(() => {
-    getFollowers({profileId: route.params.profileId});
+    getFollowing({profileId: route.params.profileId});
   }, []);
 
-  return followers.isLoading ? (
+  return following.isLoading ? (
     <ActivityIndicator style={{flex: 1, justifyContent: 'center'}} />
   ) : (
     <FlatList
-      data={followers.userFollowers}
+      data={following.userFollowing}
       keyExtractor={item => item.id}
       renderItem={({item}) => <FollowersItem item={item} />}
     />
   );
 };
 
-const mapStateToProps = ({followers}) => {
-  return {followers: followers};
+const mapStateToProps = ({following}) => {
+  return {following: following};
 };
 
-export default connect(mapStateToProps, {getFollowers})(FollowersScreen);
+export default connect(mapStateToProps, {getFollowing})(FollowingScreen);

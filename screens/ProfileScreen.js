@@ -33,7 +33,15 @@ const ProfileScreen = ({profile, getProfile, route}) => {
                 })
               }
             />
-            <ActivityCount count={profile.following} title="following" />
+            <ActivityCount
+              count={profile.following}
+              title="following"
+              onPress={() =>
+                NavigationAction.navigate('Following', {
+                  profileId: route.params.userId,
+                })
+              }
+            />
           </View>
         </View>
       </View>

@@ -4,7 +4,7 @@ import {getFollowers, setFollowers} from '../actions';
 
 import FIREBASE from '../firebase/apis';
 
-export function* fetchGetFollowers(action) {
+function* fetchGetFollowers(action) {
   const followers = [];
   yield put(setFollowers({isLoading: true, userFollowers: followers}));
   const res = yield FIREBASE.getFollowers(action.payload.profileId);
