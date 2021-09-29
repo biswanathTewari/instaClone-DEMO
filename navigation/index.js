@@ -8,6 +8,7 @@ import FontAwesome, {SolidIcons} from 'react-native-fontawesome';
 import HomeScreen from '../screens/HomeScreen';
 import AuthScreen from '../screens/AuthScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import FollowersScreen from '../screens/FollowerScreen';
 
 import HomeHeader from '../components/HomeHeader';
 
@@ -83,7 +84,7 @@ const DashBoard = ({route}) => {
 const index = ({user}) => {
   useEffect(() => {
     if (!user.userId) {
-      NavigationAction.resetTo('AuthCheck');
+      NavigationAction.resetTo('LogIn');
     }
   }, [user.userId]);
 
@@ -118,6 +119,13 @@ const index = ({user}) => {
         component={DashBoard}
         options={{headerShown: false}}
         initialParams={{user: user}}
+      />
+      <Stack.Screen
+        name="Followers"
+        component={FollowersScreen}
+        options={({route}) => ({
+          title: 'Followers',
+        })}
       />
     </Stack.Navigator>
   );

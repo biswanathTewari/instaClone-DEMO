@@ -36,11 +36,11 @@ const FIREBASE = {
       .get();
   },
 
-  getFollowers: (profileId, showModal) => {
+  getFollowers: profileId => {
     return firestoreDB
       .collection('users')
       .doc(profileId)
-      .collection(showModal)
+      .collection('followers')
       .get();
   },
 

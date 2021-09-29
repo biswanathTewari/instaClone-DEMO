@@ -6,6 +6,8 @@ import ActivityCount from '../components/ActivityCount';
 
 import {getProfile} from '../actions';
 
+import NavigationAction from '../navigation/NavigationAction';
+
 const ProfileScreen = ({profile, getProfile, route}) => {
   useEffect(() => {
     getProfile(route.params.userId);
@@ -22,7 +24,15 @@ const ProfileScreen = ({profile, getProfile, route}) => {
           <Text style={{fontSize: 20}}>{profile.displayName}</Text>
           <View style={styles.counts}>
             <ActivityCount count={profile.postsCount} title="posts" />
-            <ActivityCount count={profile.followers} title="followers" />
+            <ActivityCount
+              count={profile.followers}
+              title="followers"
+              onPress={() =>
+                NavigationAction.navigate('Followers', {
+                  profileId: route.params.userId,
+                })
+              }
+            />
             <ActivityCount count={profile.following} title="following" />
           </View>
         </View>

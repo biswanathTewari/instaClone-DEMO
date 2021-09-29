@@ -3,7 +3,7 @@ import {View, StyleSheet, TouchableWithoutFeedback, Text} from 'react-native';
 
 const ActivityCount = ({title, count, onPress}) => {
   return (
-    <TouchableWithoutFeedback>
+    <TouchableWithoutFeedback onPress={onPress}>
       <Text style={styles.container}>
         <Text style={{fontWeight: 'bold'}}>{count}</Text> {title}
       </Text>
