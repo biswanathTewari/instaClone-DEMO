@@ -7,32 +7,10 @@ import ActivityCount from '../components/ActivityCount';
 import {getProfile} from '../actions';
 
 const ProfileScreen = ({profile, getProfile, route}) => {
-  const [contents, setContent] = useState([]);
-
   useEffect(() => {
     getProfile(route.params.userId);
   }, []);
 
-  // const fetchImages = async () => {
-  //   const myHeaders = {
-  //     Authorization: 'Client-ID a7f79d75ef4ea17',
-  //   };
-  //   const requestOptions = {
-  //     method: 'GET',
-  //     headers: myHeaders,
-  //   };
-
-  //   const res = await fetch(
-  //     'https://api.imgur.com/3/gallery/top/viral/day/2',
-  //     requestOptions,
-  //   );
-  //   const {data} = await res.json();
-  //   setContent(data.filter(item => item.images[0].type == 'image/jpeg'));
-  // };
-
-  // useEffect(() => {
-  //   fetchImages();
-  // }, []);
   return (
     <View style={styles.container}>
       <View style={styles.details}>

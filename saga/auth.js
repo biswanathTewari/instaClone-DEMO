@@ -19,7 +19,7 @@ function* fetchLogin(action) {
       }),
     );
 
-    yield call(NavigationAction.resetTo, 'Home', 0);
+    yield call(NavigationAction.resetTo, 'DashBoard', 0);
   } catch (error) {
     console.log(error.code.split('/')[1]);
     //yield put(setError(error.code.split('/')[1]));

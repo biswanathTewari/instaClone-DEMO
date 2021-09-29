@@ -1,6 +1,8 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {connect} from 'react-redux';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import FontAwesome, {SolidIcons} from 'react-native-fontawesome';
 
 import HomeScreen from '../screens/HomeScreen';
 import AuthScreen from '../screens/AuthScreen';
@@ -9,8 +11,52 @@ import ProfileScreen from '../screens/ProfileScreen';
 import HomeHeader from '../components/HomeHeader';
 
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
-const index = () => {
+const DashBoard = ({route}) => {
+  return (
+    <Tab.Navigator
+      initialRouteName="Home"
+      screenOptions={({route}) => ({
+        tabBarIcon: ({focused, color, size}) => {
+          let iconName;
+
+          if (route.name === 'Home') {
+            iconName = 'home';
+          } else if (route.name === 'Profile') {
+            iconName = 'user-circle';
+          }
+          return (
+            <FontAwesome
+              style={{color: color, fontSize: 25}}
+              icon={SolidIcons[iconName]}
+            />
+          );
+        },
+        tabBarActiveTintColor: 'purple',
+        tabBarInactiveTintColor: 'gray',
+      })}>
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={({navigation}) => ({
+          headerTitle: () => <HomeHeader title="instagram" />,
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+        })}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        initialParams={{userId: route.params.userId}}
+        options={{headerShown: false}}
+      />
+    </Tab.Navigator>
+  );
+};
+
+const index = ({userId}) => {
   return (
     <Stack.Navigator initialRouteName="Auth">
       <Stack.Screen
@@ -30,26 +76,17 @@ const index = () => {
         })}
       />
       <Stack.Screen
-        name="Home"
-        component={HomeScreen}
-        options={({navigation}) => ({
-          headerTitle: () => <HomeHeader title="instagram" />,
-          headerStyle: {
-            backgroundColor: '#fff',
-          },
-        })}
-      />
-      <Stack.Screen
-        name="Profile"
-        component={ProfileScreen}
-        options={({route}) => ({
-          title: '',
-        })}
+        name="DashBoard"
+        component={DashBoard}
+        options={{headerShown: false}}
+        initialParams={{userId: userId}}
       />
     </Stack.Navigator>
   );
 };
 
-const styles = StyleSheet.create({});
+const mapStateToProps = ({user}) => {
+  return {userId: user.userId};
+};
 
-export default index;
+export default connect(mapStateToProps)(index);
