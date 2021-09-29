@@ -9,10 +9,11 @@ import {
 import {connect} from 'react-redux';
 
 import FontAwesome, {SolidIcons} from 'react-native-fontawesome';
+import {signOut} from '../actions';
 
 import NavigationAction from '../navigation/NavigationAction';
 
-const HomeHeader = ({title, userId}) => {
+const HomeHeader = ({title, userId, signOut}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
@@ -23,7 +24,7 @@ const HomeHeader = ({title, userId}) => {
           }>
           <FontAwesome style={styles.iconStyle} icon={SolidIcons.userCircle} />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => NavigationAction.resetTo('LogIn')}>
+        <TouchableOpacity onPress={() => signOut()}>
           <FontAwesome style={styles.iconStyle} icon={SolidIcons.signOutAlt} />
         </TouchableOpacity>
       </View>
@@ -58,4 +59,4 @@ const mapSTateToProps = ({user}) => {
   return {userId: user.userId};
 };
 
-export default connect(mapSTateToProps)(HomeHeader);
+export default connect(mapSTateToProps, {signOut})(HomeHeader);

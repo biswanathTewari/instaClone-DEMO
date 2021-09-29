@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {View, ActivityIndicator} from 'react-native';
 import {connect} from 'react-redux';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -10,10 +11,33 @@ import ProfileScreen from '../screens/ProfileScreen';
 
 import HomeHeader from '../components/HomeHeader';
 
+import NavigationAction from './NavigationAction';
+
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
+const AuthCheck = ({navigation, route}) => {
+  const userId = route.params.userId;
+
+  useEffect(() => {
+    NavigationAction.set(navigation);
+    if (userId) {
+      NavigationAction.resetTo('DashBoard');
+    } else {
+      NavigationAction.resetTo('LogIn');
+    }
+  }, [userId]);
+
+  return (
+    <View style={{flex: 1, justifyContent: 'center'}}>
+      <ActivityIndicator size={'large'} />
+    </View>
+  );
+};
+
 const DashBoard = ({route}) => {
+  const user = route.params.user;
+
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -49,16 +73,30 @@ const DashBoard = ({route}) => {
       <Tab.Screen
         name="Profile"
         component={ProfileScreen}
-        initialParams={{userId: route.params.userId}}
+        initialParams={{userId: user.userId}}
         options={{headerShown: false}}
       />
     </Tab.Navigator>
   );
 };
 
-const index = ({userId}) => {
+const index = ({user}) => {
+  useEffect(() => {
+    if (!user.userId) {
+      NavigationAction.resetTo('AuthCheck');
+    }
+  }, [user.userId]);
+
   return (
-    <Stack.Navigator initialRouteName="Auth">
+    <Stack.Navigator initialRouteName="AuthCheck">
+      <Stack.Screen
+        name="AuthCheck"
+        component={AuthCheck}
+        initialParams={{userId: user.userId}}
+        options={({route}) => ({
+          headerShown: false,
+        })}
+      />
       <Stack.Screen
         name="SignUp"
         component={AuthScreen}
@@ -79,14 +117,14 @@ const index = ({userId}) => {
         name="DashBoard"
         component={DashBoard}
         options={{headerShown: false}}
-        initialParams={{userId: userId}}
+        initialParams={{user: user}}
       />
     </Stack.Navigator>
   );
 };
 
 const mapStateToProps = ({user}) => {
-  return {userId: user.userId};
+  return {user: user};
 };
 
 export default connect(mapStateToProps)(index);

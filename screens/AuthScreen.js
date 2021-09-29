@@ -30,12 +30,8 @@ const reviewSchemaLogin = yup.object({
   password: yup.string().required().min(4),
 });
 
-const AuthScreen = ({route, navigation, logIn, signUp}) => {
+const AuthScreen = ({route, logIn, signUp}) => {
   const {newuser} = route.params;
-
-  useEffect(() => {
-    if (newuser) NavigationAction.set(navigation);
-  }, []);
 
   return (
     <View style={styles.container}>
@@ -49,7 +45,6 @@ const AuthScreen = ({route, navigation, logIn, signUp}) => {
           }}
           validationSchema={newuser ? reviewSchemaSignUp : reviewSchemaLogin}
           onSubmit={(values, actions) => {
-            console.log(values);
             if (newuser) {
               console.log('signin up');
               const payload = {
@@ -65,7 +60,7 @@ const AuthScreen = ({route, navigation, logIn, signUp}) => {
               };
               logIn(payload);
             }
-            //actions.resetForm();
+            actions.resetForm();
           }}>
           {({
             handleSubmit,
