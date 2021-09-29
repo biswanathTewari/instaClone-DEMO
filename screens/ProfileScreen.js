@@ -1,31 +1,38 @@
 import React, {useState, useEffect} from 'react';
+import {connect} from 'react-redux';
 import {View, StyleSheet, Text, Image, ScrollView} from 'react-native';
 
 import ActivityCount from '../components/ActivityCount';
 
-const ProfileScreen = () => {
+import {getProfile} from '../actions';
+
+const ProfileScreen = ({profile, getProfile, route}) => {
   const [contents, setContent] = useState([]);
 
-  const fetchImages = async () => {
-    const myHeaders = {
-      Authorization: 'Client-ID a7f79d75ef4ea17',
-    };
-    const requestOptions = {
-      method: 'GET',
-      headers: myHeaders,
-    };
-
-    const res = await fetch(
-      'https://api.imgur.com/3/gallery/top/viral/day/2',
-      requestOptions,
-    );
-    const {data} = await res.json();
-    setContent(data.filter(item => item.images[0].type == 'image/jpeg'));
-  };
-
   useEffect(() => {
-    fetchImages();
+    getProfile(route.params.userId);
   }, []);
+
+  // const fetchImages = async () => {
+  //   const myHeaders = {
+  //     Authorization: 'Client-ID a7f79d75ef4ea17',
+  //   };
+  //   const requestOptions = {
+  //     method: 'GET',
+  //     headers: myHeaders,
+  //   };
+
+  //   const res = await fetch(
+  //     'https://api.imgur.com/3/gallery/top/viral/day/2',
+  //     requestOptions,
+  //   );
+  //   const {data} = await res.json();
+  //   setContent(data.filter(item => item.images[0].type == 'image/jpeg'));
+  // };
+
+  // useEffect(() => {
+  //   fetchImages();
+  // }, []);
   return (
     <View style={styles.container}>
       <View style={styles.details}>
@@ -34,23 +41,25 @@ const ProfileScreen = () => {
           style={styles.image}
         />
         <View style={styles.activity}>
-          <Text style={{fontSize: 20}}>iambizan</Text>
+          <Text style={{fontSize: 20}}>{profile.displayName}</Text>
           <View style={styles.counts}>
-            <ActivityCount count="10" title="posts" />
-            <ActivityCount count="10" title="followers" />
-            <ActivityCount count="10" title="following" />
+            <ActivityCount count={profile.postsCount} title="posts" />
+            <ActivityCount count={profile.followers} title="followers" />
+            <ActivityCount count={profile.following} title="following" />
           </View>
         </View>
       </View>
 
       <ScrollView style={styles.sv}>
         <View style={styles.content}>
-          {contents.map(item => (
-            <Image
-              source={{uri: item.images[0].link}}
-              style={{height: 110, width: 110, margin: 9}}
-            />
-          ))}
+          {profile.posts &&
+            profile.posts.map(item => (
+              <Image
+                source={{uri: item.imageUrl}}
+                style={{height: 110, width: 110, margin: 9}}
+                key={item.caption}
+              />
+            ))}
         </View>
       </ScrollView>
     </View>
@@ -98,4 +107,8 @@ const styles = StyleSheet.create({
   userInfo: {},
 });
 
-export default ProfileScreen;
+const mapStateToProps = ({profile}) => {
+  return {profile: profile};
+};
+
+export default connect(mapStateToProps, {getProfile})(ProfileScreen);
