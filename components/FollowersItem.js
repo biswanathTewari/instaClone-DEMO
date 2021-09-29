@@ -1,9 +1,15 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 
+import NavigationAction from '../navigation/NavigationAction';
+
 const FollowersItem = ({item}) => {
   return (
-    <TouchableOpacity activeOpacity={0.6} onPress={() => {}}>
+    <TouchableOpacity
+      activeOpacity={0.6}
+      onPress={() => {
+        NavigationAction.push('Profile', {userId: item.id});
+      }}>
       <View style={styles.userItem}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <Image

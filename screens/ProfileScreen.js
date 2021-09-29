@@ -28,7 +28,7 @@ const ProfileScreen = ({profile, getProfile, route}) => {
               count={profile.followers}
               title="followers"
               onPress={() =>
-                NavigationAction.navigate('Followers', {
+                NavigationAction.push('Followers', {
                   profileId: route.params.userId,
                 })
               }
@@ -37,7 +37,7 @@ const ProfileScreen = ({profile, getProfile, route}) => {
               count={profile.following}
               title="following"
               onPress={() =>
-                NavigationAction.navigate('Following', {
+                NavigationAction.push('Following', {
                   profileId: route.params.userId,
                 })
               }

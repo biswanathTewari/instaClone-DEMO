@@ -16,6 +16,8 @@ class NavigationAction {
 
   pop = () => this.navigation.pop();
 
+  push = (routeName, params) => this.navigation.push(routeName, params);
+
   resetTo = (routeName, index = 0, params = {}) => {
     const resetAction = CommonActions.reset({
       index,

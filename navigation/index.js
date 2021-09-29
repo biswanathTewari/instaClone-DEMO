@@ -135,6 +135,11 @@ const index = ({user}) => {
           title: 'Following',
         })}
       />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        initialParams={{userId: user.userId}}
+      />
     </Stack.Navigator>
   );
 };
